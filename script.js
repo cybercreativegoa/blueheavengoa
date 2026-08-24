@@ -6,39 +6,39 @@
 /* =========================================================
    MENU DATA
    ========================================================= */
-
 const items = [
-  ["popular","Butter Squids","Tender squid in a rich buttery Goan-style preparation.","₹450"],
-  ["popular","Crispy Paneer","Crispy paneer bites with a flavorful house seasoning.","₹320"],
-  ["popular","Chicken Cafreal","Goan-style chicken packed with herbs and spices.","₹420"],
-  ["popular","Fish Curry Rice","Classic Goan fish curry served with fragrant rice.","₹380"],
 
-  ["mains","Chicken Cafreal","A Goan favourite with fresh herbs and bold spices.","₹420"],
-  ["mains","Chicken Xacuti","Slow-cooked chicken in a rich roasted-spice gravy.","₹450"],
-  ["mains","Pork Sorpotel","Traditional Goan pork preparation with deep spices.","₹480"],
-  ["mains","Fish Curry Rice","Coastal fish curry served with steamed rice.","₹380"],
+  ["popular", "Butter Squids", "Tender squid in a rich buttery Goan-style preparation."],
+  ["popular", "Crispy Paneer", "Crispy paneer bites with a flavorful house seasoning."],
+  ["popular", "Chicken Cafreal", "Goan-style chicken packed with herbs and spices."],
+  ["popular", "Fish Curry Rice", "Classic Goan fish curry served with fragrant rice."],
 
-  ["vegetarian","Crispy Paneer","Golden paneer with crunchy exterior and house seasoning.","₹320"],
-  ["vegetarian","Goan Vegetable Curry","Seasonal vegetables in a fragrant coconut-based curry.","₹280"],
-  ["vegetarian","Garden Salad","Fresh greens, vegetables and a light dressing.","₹220"],
-  ["vegetarian","Masala Fries","Crispy fries finished with a house masala.","₹180"],
+  ["mains", "Chicken Cafreal", "A Goan favourite with fresh herbs and bold spices."],
+  ["mains", "Chicken Xacuti", "Slow-cooked chicken in a rich roasted-spice gravy."],
+  ["mains", "Pork Sorpotel", "Traditional Goan pork preparation with deep spices."],
+  ["mains", "Fish Curry Rice", "Coastal fish curry served with steamed rice."],
 
-  ["starters","Chicken Wings","Crispy wings tossed in a flavorful house sauce.","₹320"],
-  ["starters","Crispy Paneer","Crunchy paneer bites with a spicy dip.","₹320"],
-  ["starters","Calamari","Lightly seasoned squid served crisp and tender.","₹380"],
-  ["starters","Masala Fries","Crispy fries with our signature seasoning.","₹180"],
+  ["vegetarian", "Crispy Paneer", "Golden paneer with crunchy exterior and house seasoning."],
+  ["vegetarian", "Goan Vegetable Curry", "Seasonal vegetables in a fragrant coconut-based curry."],
+  ["vegetarian", "Garden Salad", "Fresh greens, vegetables and a light dressing."],
+  ["vegetarian", "Masala Fries", "Crispy fries finished with a house masala."],
 
-  ["seafood","Butter Squids","Tender squid cooked in a rich buttery preparation.","₹450"],
-  ["seafood","Goan Fish Curry","Classic coconut-based Goan curry with fresh fish.","₹380"],
-  ["seafood","Prawn Curry","Juicy prawns cooked in a fragrant coastal curry.","₹480"],
-  ["seafood","Fish Fry","Fresh fish marinated with Goan spices and pan fried.","₹420"],
+  ["starters", "Chicken Wings", "Crispy wings tossed in a flavorful house sauce."],
+  ["starters", "Crispy Paneer", "Crunchy paneer bites with a spicy dip."],
+  ["starters", "Calamari", "Lightly seasoned squid served crisp and tender."],
+  ["starters", "Masala Fries", "Crispy fries with our signature seasoning."],
 
-  ["drinks","Fresh Lime Soda","Refreshing lime, soda and a touch of sweetness.","₹120"],
-  ["drinks","Fresh Fruit Juice","Seasonal fruit blended fresh to order.","₹160"],
-  ["drinks","Cold Coffee","Smooth chilled coffee with a creamy finish.","₹180"],
-  ["drinks","Iced Tea","Refreshing chilled tea with citrus notes.","₹140"]
+  ["seafood", "Butter Squids", "Tender squid cooked in a rich buttery preparation."],
+  ["seafood", "Goan Fish Curry", "Classic coconut-based Goan curry with fresh fish."],
+  ["seafood", "Prawn Curry", "Juicy prawns cooked in a fragrant coastal curry."],
+  ["seafood", "Fish Fry", "Fresh fish marinated with Goan spices and pan fried."],
+
+  ["drinks", "Fresh Lime Soda", "Refreshing lime, soda and a touch of sweetness."],
+  ["drinks", "Fresh Fruit Juice", "Seasonal fruit blended fresh to order."],
+  ["drinks", "Cold Coffee", "Smooth chilled coffee with a creamy finish."],
+  ["drinks", "Iced Tea", "Refreshing chilled tea with citrus notes."]
+
 ];
-
 const MENU_PREVIEW_LIMIT = 6;
 
 
@@ -58,7 +58,7 @@ let activeCategory = "all";
    MENU CARD HTML
    ========================================================= */
 
-function cardHtml([cat, name, desc, price]) {
+function cardHtml([cat, name, desc]) {
 
   return `
     <article class="menu-item">
@@ -69,9 +69,7 @@ function cardHtml([cat, name, desc, price]) {
 
         <span class="menu-dots"></span>
 
-        <span class="menu-price">
-          ${price}
-        </span>
+       
 
       </div>
 

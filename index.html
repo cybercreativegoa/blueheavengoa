@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Blue Heaven Restaurant & Bar — authentic Goan flavours, seafood, live music and sports vibes in Margao, Goa.">
   <title>Blue Heaven | Restaurant & Bar | Goa</title>
+  
+<!-- FAVICON -->
+  <link rel="icon" type="image/jpeg" href="images/fav.png">
+
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,40 +84,58 @@
 </div>
 
 <header class="site-header" id="siteHeader">
-  <div class="nav-pill container">
-    <a class="brand" href="#home">
-      <img id="logo" src="images/logo.jpg" alt="Blue Heaven Goa logo">
-      <span></span>
-    </a>
+  <div class="nav-pill container bh-centered-nav">
 
-    <nav class="nav-menu" id="navMenu">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#menu">Menu</a>
-      <a href="#special">Specials</a>
-      <a href="#reservation">Reservation</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#reservation">Contact</a>
-    </nav>
+  <!-- LEFT LINKS -->
+  <nav class="nav-menu bh-nav-left" id="navMenu">
 
-    <a class="nav-button" href="#reservation">Book a Table</a>
-
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-
-  <nav class="nav-menu-mobile" id="navMenuMobile">
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#menu">Menu</a>
     <a href="#special">Specials</a>
+
+  </nav>
+
+
+  <!-- CENTER LOGO -->
+  <a class="brand bh-centered-brand" href="#home">
+
+    <img
+      id="logo"
+      src="images/logo.jpg"
+      alt="Blue Heaven Goa logo"
+    >
+
+  </a>
+
+
+  <!-- RIGHT LINKS -->
+  <nav class="bh-nav-right">
+
     <a href="#reservation">Reservation</a>
     <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
-    <a class="nav-button" href="#reservation">Book a Table</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#reservation">Contact</a>
+
+    <a class="nav-button bh-nav-book" href="#reservation">
+      Book a Table
+    </a>
+
   </nav>
+
+
+  <!-- MOBILE MENU -->
+  <button
+    class="menu-toggle"
+    id="menuToggle"
+    aria-label="Open menu"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+</div>
 </header>
 
 <main>
@@ -1056,61 +1078,95 @@
 <!-- =========================================================
      RESERVATION / FIND US
 ========================================================= -->
+```html
+<!-- =========================================================
+     BLUE HEAVEN — PREMIUM RESERVATION SECTION
+========================================================= -->
 
-<section class="section reservation" id="reservation">
+<section class="bh-reservation" id="reservation">
 
-  <div class="container">
+  <!-- BACKGROUND OVERLAY -->
+  <div class="bh-reservation-overlay"></div>
 
-    <!-- SECTION HEADER -->
-    <div class="section-heading centered reservation-heading fade-up">
+  <div class="bh-reservation-container">
 
-      <p class="kicker">Find Us & Book</p>
+    <!-- SECTION INTRO -->
+    <div class="bh-reservation-intro fade-up">
+
+      <span class="bh-reservation-eyebrow">
+        <i class="fa-solid fa-utensils"></i>
+        FIND US & BOOK
+      </span>
 
       <h2>
-        Come visit <span>Blue Heaven.</span>
+        Come visit
+        <span>Blue Heaven.</span>
       </h2>
 
       <p>
         Located in the heart of Margao, just minutes from Colva Beach.
-        Reserve your table and get ready for a taste of authentic Goan
-        flavours, warm hospitality and good times.
+        Reserve your table and experience authentic Goan flavours,
+        warm hospitality and unforgettable good times.
       </p>
 
     </div>
 
 
-    <!-- RESERVATION CONTENT -->
-    <div class="reservation-wrap">
+    <!-- MAIN RESERVATION AREA -->
+    <div class="bh-reservation-layout">
 
 
-      <!-- LEFT SIDE -->
-      <div class="reservation-copy fade-left">
+      <!-- =====================================================
+           LEFT INFORMATION PANEL
+      ====================================================== -->
+
+      <div class="bh-info-panel fade-left">
+
+        <div class="bh-info-top">
+
+          <span class="bh-small-label">
+            BLUE HEAVEN RESTAURANT
+          </span>
+
+          <h3>
+            Your table is
+            <span>waiting.</span>
+          </h3>
+
+          <p>
+            Whether it's a casual lunch, family dinner or a night
+            out with friends, we'd love to have you with us.
+          </p>
+
+        </div>
+
 
         <!-- LOCATION -->
-        <div class="reservation-info-card">
+        <div class="bh-info-item">
 
-          <div class="reservation-info-icon">
+          <div class="bh-info-icon">
             <i class="fa-solid fa-location-dot"></i>
           </div>
 
-          <div class="reservation-info-content">
+          <div class="bh-info-text">
 
-            <span class="info-label">OUR LOCATION</span>
+            <span>OUR LOCATION</span>
 
-            <h3>Margao, Goa</h3>
+            <h4>Colva, Goa</h4>
 
             <p>
               Just 10 minutes from Colva Beach
             </p>
 
             <a
-              class="btn btn-blue directions-btn"
               href="https://maps.app.goo.gl/ya1LvcmdPSd3VtXy7"
               target="_blank"
+              
               rel="noopener"
+              class="bh-directions"
             >
-              <i class="fa-solid fa-location-arrow"></i>
               Get Directions
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
 
           </div>
@@ -1118,74 +1174,69 @@
         </div>
 
 
+        <!-- DIVIDER -->
+        <div class="bh-info-divider"></div>
+
+
         <!-- OPENING HOURS -->
-        <div class="hours-card">
+        <div class="bh-hours">
 
-          <div class="hours-card-head">
+          <div class="bh-hours-title">
 
-            <div class="hours-icon">
+            <div class="bh-info-icon">
               <i class="fa-regular fa-clock"></i>
             </div>
 
             <div>
-              <span class="info-label">WHEN TO VISIT</span>
-              <h3>Opening Hours</h3>
+              <span>WHEN TO VISIT</span>
+              <h4>Opening Hours</h4>
             </div>
 
           </div>
 
 
-          <div class="hours-row">
+          <div class="bh-hours-row">
 
             <div>
-              <span class="hours-day">
-                Mon, Tue & Thu–Sun
-              </span>
-
-              <small>
-                Open
-              </small>
+              <strong>Mon, Tue & Thu–Sun</strong>
+              <small>Open</small>
             </div>
 
-            <span class="hours-time">
-              11:00 AM – 4:00 PM
-              <br>
-              7:00 PM – 12:00 AM
-            </span>
+            <div class="bh-hours-time">
+              <span>11:00 AM – 4:00 PM</span>
+              <span>7:00 PM – 12:00 AM</span>
+            </div>
 
           </div>
 
 
-          <div class="hours-row hours-row-closed">
+          <div class="bh-hours-row bh-hours-closed">
 
             <div>
-              <span class="hours-day">
-                Wednesday
-              </span>
-
-              <small>
-                Weekly closing
-              </small>
+              <strong>Wednesday</strong>
+              <small>Weekly closing</small>
             </div>
 
-            <span class="hours-badge">
-              Closed
+            <span class="bh-closed-badge">
+              CLOSED
             </span>
 
           </div>
 
         </div>
 
-        <br>
-        <br>
-        <!-- SMALL NOTE -->
-        <div class="reservation-note">
 
-          <i class="fa-solid fa-circle-info"></i>
-          
+        <!-- WHATSAPP NOTE -->
+        <div class="bh-booking-note">
+
+          <div class="bh-note-icon">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+
           <p>
-            Reservations are confirmed through WhatsApp.
-            Your details will be prepared automatically for you.
+            Reservations are confirmed through
+            <strong>WhatsApp.</strong>
+            Your booking details will be prepared automatically.
           </p>
 
         </div>
@@ -1193,40 +1244,50 @@
       </div>
 
 
-      <!-- RIGHT SIDE — FORM -->
+
+      <!-- =====================================================
+           RIGHT RESERVATION FORM
+      ====================================================== -->
+
       <form
-        class="reservation-form scale-in"
+        class="bh-booking-form scale-in"
         id="reservationForm"
       >
 
-        <div class="reservation-form-header">
+        <div class="bh-form-heading">
 
-          <span class="form-eyebrow">
+          <span>
             RESERVE YOUR TABLE
           </span>
 
           <h3>
-            Let's save you a seat.
+            Let's save you
+            <em>a seat.</em>
           </h3>
 
           <p>
-            Fill in your details and we'll take care of the rest.
+            Tell us when you'd like to visit.
           </p>
 
         </div>
 
 
-        <div class="form-grid">
+        <!-- FORM GRID -->
+        <div class="bh-form-grid">
+
 
           <!-- NAME -->
-          <label style="grid-column:span 2;">
+          <label class="bh-field bh-field-full">
 
-            <span>Your Name</span>
+            <span>
+              <i class="fa-regular fa-user"></i>
+              Your Name
+            </span>
 
             <input
               type="text"
               id="resName"
-              placeholder="Full name"
+              placeholder="Enter your full name"
               required
             >
 
@@ -1234,9 +1295,12 @@
 
 
           <!-- EMAIL -->
-          <label>
+          <label class="bh-field">
 
-            <span>Email</span>
+            <span>
+              <i class="fa-regular fa-envelope"></i>
+              Email
+            </span>
 
             <input
               type="email"
@@ -1248,9 +1312,12 @@
 
 
           <!-- PHONE -->
-          <label>
+          <label class="bh-field">
 
-            <span>Phone</span>
+            <span>
+              <i class="fa-solid fa-phone"></i>
+              Phone
+            </span>
 
             <input
               type="tel"
@@ -1263,9 +1330,12 @@
 
 
           <!-- DATE -->
-          <label>
+          <label class="bh-field">
 
-            <span>Date</span>
+            <span>
+              <i class="fa-regular fa-calendar"></i>
+              Date
+            </span>
 
             <input
               type="date"
@@ -1277,9 +1347,12 @@
 
 
           <!-- TIME -->
-          <label>
+          <label class="bh-field">
 
-            <span>Time</span>
+            <span>
+              <i class="fa-regular fa-clock"></i>
+              Time
+            </span>
 
             <input
               type="time"
@@ -1291,16 +1364,19 @@
 
 
           <!-- GUESTS -->
-          <label style="grid-column:span 2;">
+          <label class="bh-field bh-field-full">
 
-            <span>Guests</span>
+            <span>
+              <i class="fa-solid fa-users"></i>
+              Number of Guests
+            </span>
 
             <input
               type="number"
               id="resGuests"
               min="1"
               max="30"
-              placeholder="Number of guests"
+              placeholder="How many people?"
               required
             >
 
@@ -1309,55 +1385,83 @@
         </div>
 
 
-        <!-- WHATSAPP BUTTON -->
+        <!-- SUBMIT -->
         <button
-          class="btn btn-whatsapp full"
+          class="bh-whatsapp-btn"
           type="submit"
         >
 
-          <i class="fa-brands fa-whatsapp"></i>
+          <span class="bh-whatsapp-icon">
+            <i class="fa-brands fa-whatsapp"></i>
+          </span>
 
-          <span>
+          <span class="bh-whatsapp-text">
+            <small>CONTINUE WITH</small>
             Make Reservation on WhatsApp
           </span>
 
-          <i class="fa-solid fa-arrow-right"></i>
+          <span class="bh-whatsapp-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
 
         </button>
 
 
-        <p class="form-note">
+        <div class="bh-form-security">
 
           <i class="fa-solid fa-lock"></i>
 
-          WhatsApp will open with your reservation
-          message ready to send.
+          Your details are only used to prepare
+          your reservation message.
 
-        </p>
+        </div>
 
       </form>
 
     </div>
 
 
-    <!-- MAP -->
-    <div
-      class="map-horizontal fade-up"
-      style="margin-top:var(--gap-lg);"
-    >
 
-      <iframe
-        src="https://www.google.com/maps?q=Blue%20Heaven%20Restaurant%20%26%20Bar%20Margao%20Goa&output=embed"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Blue Heaven location map"
-      ></iframe>
+    <!-- =====================================================
+         MAP
+    ====================================================== -->
+
+    <div class="bh-map-wrapper fade-up">
+
+      <div class="bh-map-heading">
+
+        <div>
+
+          <span>COME FIND US</span>
+
+          <h3>
+            See you in <strong>Colva.</strong>
+          </h3>
+
+        </div>
+
+        <i class="fa-solid fa-location-dot"></i>
+
+      </div>
+
+      <div class="bh-map">
+
+        <iframe
+          src="https://www.google.com/maps?q=Blue%20Heaven%20Restaurant%20%26%20Bar%20Margao%20Goa&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Blue Heaven location map"
+        ></iframe>
+
+      </div>
 
     </div>
 
   </div>
 
 </section>
+
+
 
 </main>
 
