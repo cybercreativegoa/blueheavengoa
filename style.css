@@ -9619,3 +9619,54 @@ p + a.btn,
 
 }
 
+/* =========================================================
+   BLUE HEAVEN GALLERY — DESKTOP SIDE MARGINS
+========================================================= */
+
+.gallery-premium > .container {
+    width: calc(100% - 70px) !important;
+    max-width: 1400px !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+
+/* Large screens */
+
+@media (min-width: 1500px) {
+
+    .gallery-premium > .container {
+        width: calc(100% - 100px) !important;
+        max-width: 1400px !important;
+    }
+
+}
+
+
+/* Laptop / MacBook */
+
+@media (min-width: 901px) and (max-width: 1499px) {
+
+    .gallery-premium > .container {
+        width: calc(100% - 70px) !important;
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 900px) {
+
+    .gallery-premium > .container {
+        width: calc(100% - 30px) !important;
+
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+}
