@@ -1,4 +1,4 @@
-  /* =========================================================
+/* =========================================================
     BLUE HEAVEN — SYMMETRIC / VIEWPORT-FIT DESIGN
     ========================================================= */
 
@@ -97,14 +97,6 @@
   /* =========================================================
     PRELOADER
     ========================================================= */
-
-/* =========================================================
-   BLUE HEAVEN PRELOADER
-========================================================= */
-
-/* =========================================================
-   BLUE HEAVEN PRELOADER
-========================================================= */
 
 .preloader{
   position:fixed;
@@ -462,28 +454,33 @@
     NAVBAR — FLOATING / CURVED
     ========================================================= */
 
-  .site-header{
-    position:fixed;
-    top:16px;
-    left:0;
-    right:0;
-    z-index:1000;
-  }
+.site-header{
+  position:fixed;
+  top:0; left:0; right:0;
+  width:100%;
+  z-index:2000;
 
-  .nav-pill{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    height:var(--nav-h);
-    padding:0 14px 0 18px;
-    background:rgba(7,59,86,.92);
-    backdrop-filter:blur(14px);
-    border-radius:999px;
-    box-shadow:0 14px 40px rgba(7,42,60,.25);
-    border:1px solid rgba(255,255,255,.08);
-    transition:box-shadow .3s ease, background .3s ease;
-  }
+  background:var(--blue-dark);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  box-shadow:0 5px 20px rgba(0,0,0,.12);
+}
+
+.nav-pill{
+  position:relative;
+  width:100%;
+  max-width:none;
+  height:72px;
+  margin:0;
+  padding:0 clamp(24px,4vw,70px);
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  background:transparent;
+  border:0;
+  box-shadow:none;
+}
 
   .site-header.scrolled .nav-pill{
     box-shadow:0 18px 50px rgba(7,42,60,.35);
@@ -609,7 +606,7 @@
 
     width: 50% !important;
 
-    transform: translateX(70px);
+    transform: translateX(200px);
 }
 
 
@@ -803,58 +800,136 @@
     display: none !important;
 }
 
-
 /* =========================================================
-   MOBILE
-========================================================= */
+   MOBILE NAVIGATION — COMPLETE REWRITE
+   ========================================================= */
 
 @media (max-width: 900px) {
 
     .bh-centered-nav {
-
         height: 70px !important;
-
         width: calc(100% - 30px) !important;
-
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
     }
 
+    /* Hide both navs completely on mobile */
     .bh-nav-left,
     .bh-nav-right {
-
         display: none !important;
-
     }
 
     .bh-centered-brand {
-
         position: relative !important;
-
         left: auto !important;
         top: auto !important;
-
         width: auto !important;
         height: auto !important;
-
         transform: none !important;
-
+        margin-top: 0 !important;
+        z-index: auto !important;
     }
 
     .bh-centered-brand #logo {
-
         width: 62px !important;
         height: 62px !important;
-
     }
 
     .bh-centered-nav .menu-toggle {
-
         display: flex !important;
+        order: 3 !important;
+        z-index: 10000 !important;
+    }
 
+    /* =========================================================
+       CREATE A NEW MOBILE MENU FROM SCRATCH
+    ========================================================= */
+
+    /* When menu is open, create a new dropdown */
+    .bh-centered-nav.menu-open::after {
+        content: "" !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: rgba(0,0,0,0.5) !important;
+        z-index: 9998 !important;
+        display: block !important;
+    }
+
+    /* The actual menu - built fresh */
+    .mobile-menu-dropdown {
+        display: none !important;
+    }
+
+    .mobile-menu-dropdown.open {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+
+        position: fixed !important;
+        top: 75px !important;
+        left: 14px !important;
+        right: 14px !important;
+
+        padding: 20px 22px !important;
+
+        background: rgba(7, 59, 86, 0.98) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        border-radius: 18px !important;
+
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+
+        z-index: 9999 !important;
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+    }
+
+    /* ALL LINKS in one place */
+    .mobile-menu-dropdown a {
+        display: block !important;
+        padding: 12px 0 !important;
+        width: 100% !important;
+        color: #fff !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+        text-align: left !important;
+        text-decoration: none !important;
+    }
+
+    .mobile-menu-dropdown a:last-child {
+        border-bottom: none !important;
+    }
+
+    /* Book a Table button - special styling */
+    .mobile-menu-dropdown .mobile-book-btn {
+        display: flex !important;
+        margin-top: 12px !important;
+        width: 100% !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 14px 19px !important;
+        font-size: 14px !important;
+        background: #e92d24 !important;
+        color: #fff !important;
+        border-radius: 50px !important;
+        border: none !important;
+        text-decoration: none !important;
+        font-weight: 700 !important;
+    }
+
+    .mobile-menu-dropdown .mobile-book-btn:hover {
+        background: #c4251d !important;
     }
 
 }
-
-  /* =========================================================
+/* =========================================================
     BUTTONS
     ========================================================= */
 
@@ -926,13 +1001,6 @@
 
   /* =========================================================
     HERO
-    ========================================================= */
-
-  /* =========================================================
-    BLUE HEAVEN — CINEMATIC CONTINUOUS HERO
-    ========================================================= */
-  /* =========================================================
-    HERO — CINEMATIC / CONTINUOUS ANIMATION
     ========================================================= */
 
   .hero{
@@ -2999,96 +3067,6 @@
     FOOTER
     ========================================================= */
 
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-  position:relative;
-  overflow:hidden;
-
-  color:#dcecf2;
-
-  padding:56px 0 0;
-
-  /* Premium Blue Heaven gradient */
-  background:
-    radial-gradient(
-      circle at 8% 15%,
-      rgba(21,155,211,.18),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 92% 85%,
-      rgba(226,42,29,.14),
-      transparent 32%
-    ),
-    linear-gradient(
-      125deg,
-      #03283c 0%,
-      #063c57 38%,
-      #073b56 65%,
-      #321b25 100%
-    );
-}
-
-
-/* Decorative gradient line at the top */
-
-footer::before{
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  left:0;
-
-  width:100%;
-  height:3px;
-
-  background:linear-gradient(
-    90deg,
-    #159bd3 0%,
-    #62d3f7 35%,
-    #ffffff 50%,
-    #e22a1d 70%,
-    #159bd3 100%
-  );
-
-  opacity:.9;
-}
-
-
-/* Soft decorative glow */
-
-footer::after{
-  content:"";
-
-  position:absolute;
-
-  width:420px;
-  height:420px;
-
-  right:-220px;
-  top:-180px;
-
-  border-radius:50%;
-
-  background:rgba(21,155,211,.10);
-
-  filter:blur(35px);
-
-  pointer-events:none;
-}
-
-
-/* =========================================================
-   FOOTER WRAP
-========================================================= */
-/* =========================================================
-   BLUE HEAVEN — FOOTER
-========================================================= */
-
 footer{
   position:relative !important;
   overflow:hidden !important;
@@ -3097,7 +3075,6 @@ footer{
 
   color:#eaf7fb !important;
 
-  /* MAIN FOOTER COLOR */
   background-color:#063b56 !important;
   background-image:
     radial-gradient(
@@ -3113,10 +3090,6 @@ footer{
     ) !important;
 }
 
-
-/* =========================================================
-   SOFT DECORATIVE LIGHT
-========================================================= */
 
 footer::after{
   content:"";
@@ -3141,10 +3114,6 @@ footer::after{
 }
 
 
-/* =========================================================
-   FOOTER CONTENT
-========================================================= */
-
 .footer-wrap{
   position:relative;
 
@@ -3159,10 +3128,6 @@ footer::after{
   align-items:start;
 }
 
-
-/* =========================================================
-   BRAND
-========================================================= */
 
 .footer-brand-name{
   font:700 26px "Playfair Display",serif;
@@ -3186,10 +3151,6 @@ footer::after{
   color:#c9e4ed !important;
 }
 
-
-/* =========================================================
-   COLUMN HEADINGS
-========================================================= */
 
 .footer-column h4{
   position:relative;
@@ -3224,10 +3185,6 @@ footer::after{
 }
 
 
-/* =========================================================
-   LINKS
-========================================================= */
-
 .footer-column a{
   display:block;
 
@@ -3251,10 +3208,6 @@ footer::after{
   transform:translateX(5px);
 }
 
-
-/* =========================================================
-   FOOTER TEXT
-========================================================= */
 
 .footer-column p{
   display:flex;
@@ -3281,10 +3234,6 @@ footer::after{
   text-align:center;
 }
 
-
-/* =========================================================
-   DIRECTIONS / MAP BUTTON
-========================================================= */
 
 .footer-map{
   display:inline-flex !important;
@@ -3329,10 +3278,6 @@ footer::after{
     0 10px 28px rgba(226,42,29,.30);
 }
 
-
-/* =========================================================
-   SOCIAL MEDIA
-========================================================= */
 
 .footer-social{
   display:flex;
@@ -3381,10 +3326,6 @@ footer::after{
 }
 
 
-/* =========================================================
-   FACEBOOK — BLUE
-========================================================= */
-
 .footer-social a[title="Facebook"]:hover{
   background:#1877f2 !important;
 
@@ -3398,10 +3339,6 @@ footer::after{
     0 12px 30px rgba(24,119,242,.40);
 }
 
-
-/* =========================================================
-   INSTAGRAM — ORIGINAL INSTAGRAM COLORS
-========================================================= */
 
 .footer-social a[title="Instagram"]:hover{
   background:
@@ -3425,10 +3362,6 @@ footer::after{
 }
 
 
-/* =========================================================
-   WHATSAPP — GREEN
-========================================================= */
-
 .footer-social a[title="WhatsApp"]:hover{
   background:#25d366 !important;
 
@@ -3443,10 +3376,6 @@ footer::after{
 }
 
 
-/* =========================================================
-   ICON ANIMATION
-========================================================= */
-
 .footer-social a i{
   transition:
     transform .3s ease;
@@ -3457,10 +3386,6 @@ footer::after{
   transform:scale(1.15);
 }
 
-
-/* =========================================================
-   FOOTER BOTTOM
-========================================================= */
 
 .footer-bottom{
   position:relative;
@@ -3499,10 +3424,6 @@ footer::after{
 }
 
 
-/* =========================================================
-   LEGAL
-========================================================= */
-
 .footer-legal{
   display:flex;
 
@@ -3528,10 +3449,6 @@ footer::after{
 }
 
 
-/* =========================================================
-   CREATED BY
-========================================================= */
-
 .created-by a{
   color:#ffffff !important;
 
@@ -3548,10 +3465,6 @@ footer::after{
 }
 
 
-/* =========================================================
-   TABLET
-========================================================= */
-
 @media(max-width:950px){
 
   .footer-wrap{
@@ -3562,10 +3475,6 @@ footer::after{
 
 }
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
 
 @media(max-width:680px){
 
@@ -7678,8 +7587,7 @@ p + a.btn,
 }
 
 
-/* =========================================================
-   LOCATION CARD
+/* =========================================================   LOCATION CARD
 ========================================================= */
 
 .reservation-info-card{
@@ -9600,4 +9508,3 @@ p + a.btn,
     }
 
 }
-

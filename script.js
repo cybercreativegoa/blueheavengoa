@@ -6,6 +6,7 @@
 /* =========================================================
    MENU DATA
    ========================================================= */
+
 const items = [
 
   ["popular", "Butter Squids", "Tender squid in a rich buttery Goan-style preparation."],
@@ -39,6 +40,7 @@ const items = [
   ["drinks", "Iced Tea", "Refreshing chilled tea with citrus notes."]
 
 ];
+
 const MENU_PREVIEW_LIMIT = 6;
 
 
@@ -69,8 +71,6 @@ function cardHtml([cat, name, desc]) {
 
         <span class="menu-dots"></span>
 
-       
-
       </div>
 
       <p>${desc}</p>
@@ -81,24 +81,23 @@ function cardHtml([cat, name, desc]) {
 
 
 /* =========================================================
-   MENU CARD ENTRANCE ANIMATION
+   MENU CARD ANIMATION
    ========================================================= */
 
 function animateMenuCards() {
+
+  if (!menuGrid) return;
 
   const cards =
     menuGrid.querySelectorAll(".menu-item");
 
   cards.forEach((card, index) => {
 
-    /* Initial state */
     card.style.opacity = "0";
     card.style.transform =
       "translateY(22px) scale(.97)";
     card.style.filter = "blur(4px)";
 
-
-    /* Staggered entrance */
     setTimeout(() => {
 
       card.style.opacity = "1";
@@ -106,8 +105,7 @@ function animateMenuCards() {
       card.style.transform =
         "translateY(0) scale(1)";
 
-      card.style.filter =
-        "blur(0)";
+      card.style.filter = "blur(0)";
 
     }, 70 + (index * 70));
 
@@ -121,6 +119,8 @@ function animateMenuCards() {
 
 function renderMenu(category = "all", animate = true) {
 
+  if (!menuGrid) return;
+
   activeCategory = category;
 
   const filtered =
@@ -131,41 +131,25 @@ function renderMenu(category = "all", animate = true) {
   const visible =
     filtered.slice(0, MENU_PREVIEW_LIMIT);
 
-
-  /* -----------------------------------------
-     If animation is enabled
-     ----------------------------------------- */
-
   if (
     animate &&
     menuGrid.children.length
   ) {
 
-    menuGrid.classList.add(
-      "menu-switching"
-    );
+    menuGrid.classList.add("menu-switching");
 
   }
-
-
-  /*
-    Small delay allows the old cards
-    to fade out before replacement.
-  */
 
   setTimeout(() => {
 
     menuGrid.innerHTML =
       visible.map(cardHtml).join("") ||
 
-      `<div class="empty-menu">
-        No dishes found in this category.
-      </div>`;
-
-
-    /*
-      Show / hide View Full Menu
-    */
+      `
+        <div class="empty-menu">
+          No dishes found in this category.
+        </div>
+      `;
 
     if (menuMore) {
 
@@ -176,19 +160,7 @@ function renderMenu(category = "all", animate = true) {
 
     }
 
-
-    /*
-      Remove old transition state
-    */
-
-    menuGrid.classList.remove(
-      "menu-switching"
-    );
-
-
-    /*
-      Animate new cards
-    */
+    menuGrid.classList.remove("menu-switching");
 
     if (animate) {
 
@@ -212,23 +184,14 @@ tabs.forEach(tab => {
     const category =
       tab.dataset.category;
 
-
-    /*
-      Don't animate if the
-      same category is clicked.
-    */
-
     if (
       tab.classList.contains("active") &&
       activeCategory === category
     ) {
+
       return;
+
     }
-
-
-    /*
-      Active tab
-    */
 
     tabs.forEach(t => {
 
@@ -236,32 +199,18 @@ tabs.forEach(tab => {
 
     });
 
-
     tab.classList.add("active");
 
-
-    /*
-      Render selected category
-    */
-
-    renderMenu(
-      category,
-      true
-    );
+    renderMenu(category, true);
 
   });
 
 });
 
 
-/*
-  Initial menu
-*/
+/* Initial menu */
 
-renderMenu(
-  "all",
-  false
-);
+renderMenu("all", false);
 
 
 /* =========================================================
@@ -278,9 +227,7 @@ const menuModalBody =
   document.getElementById("menuModalBody");
 
 const menuModalTabs =
-  document.querySelectorAll(
-    "#menuModalTabs button"
-  );
+  document.querySelectorAll("#menuModalTabs button");
 
 
 /* =========================================================
@@ -289,31 +236,24 @@ const menuModalTabs =
 
 function renderModalMenu(category) {
 
+  if (!menuModalBody) return;
+
   const filtered =
     category === "all"
       ? items
-      : items.filter(
-          item => item[0] === category
-        );
-
+      : items.filter(item => item[0] === category);
 
   menuModalBody.innerHTML =
     filtered.map(cardHtml).join("") ||
 
-    `<div class="empty-menu">
-      No dishes found in this category.
-    </div>`;
-
-
-  /*
-    Animate modal cards
-  */
+    `
+      <div class="empty-menu">
+        No dishes found in this category.
+      </div>
+    `;
 
   const cards =
-    menuModalBody.querySelectorAll(
-      ".menu-item"
-    );
-
+    menuModalBody.querySelectorAll(".menu-item");
 
   cards.forEach((card, index) => {
 
@@ -324,7 +264,6 @@ function renderModalMenu(category) {
 
     card.style.filter =
       "blur(3px)";
-
 
     setTimeout(() => {
 
@@ -349,6 +288,8 @@ function renderModalMenu(category) {
 
 function openMenuModal(category) {
 
+  if (!menuModal) return;
+
   menuModalTabs.forEach(tab => {
 
     tab.classList.toggle(
@@ -358,15 +299,11 @@ function openMenuModal(category) {
 
   });
 
-
   renderModalMenu(category);
-
 
   menuModal.classList.add("open");
 
-
-  document.body.style.overflow =
-    "hidden";
+  document.body.style.overflow = "hidden";
 
 }
 
@@ -377,12 +314,11 @@ function openMenuModal(category) {
 
 function closeMenuModal() {
 
-  menuModal.classList.remove(
-    "open"
-  );
+  if (!menuModal) return;
 
-  document.body.style.overflow =
-    "";
+  menuModal.classList.remove("open");
+
+  document.body.style.overflow = "";
 
 }
 
@@ -393,16 +329,11 @@ function closeMenuModal() {
 
 if (viewFullMenuBtn) {
 
-  viewFullMenuBtn.addEventListener(
-    "click",
-    () => {
+  viewFullMenuBtn.addEventListener("click", () => {
 
-      openMenuModal(
-        activeCategory
-      );
+    openMenuModal(activeCategory);
 
-    }
-  );
+  });
 
 }
 
@@ -427,20 +358,15 @@ if (menuModalClose) {
 
 if (menuModal) {
 
-  menuModal.addEventListener(
-    "click",
-    event => {
+  menuModal.addEventListener("click", event => {
 
-      if (
-        event.target === menuModal
-      ) {
+    if (event.target === menuModal) {
 
-        closeMenuModal();
-
-      }
+      closeMenuModal();
 
     }
-  );
+
+  });
 
 }
 
@@ -451,80 +377,85 @@ if (menuModal) {
 
 menuModalTabs.forEach(tab => {
 
-  tab.addEventListener(
-    "click",
-    () => {
+  tab.addEventListener("click", () => {
 
-      menuModalTabs.forEach(t => {
+    menuModalTabs.forEach(t => {
 
-        t.classList.remove(
-          "active"
-        );
+      t.classList.remove("active");
 
-      });
+    });
 
+    tab.classList.add("active");
 
-      tab.classList.add(
-        "active"
-      );
+    renderModalMenu(
+      tab.dataset.category
+    );
 
-
-      renderModalMenu(
-        tab.dataset.category
-      );
-
-    }
-  );
+  });
 
 });
 
 
 /* =========================================================
-   MOBILE NAVIGATION
+   MOBILE NAVIGATION — UPDATED WITH NEW DROPDOWN
    ========================================================= */
 
-const menuToggle =
-  document.getElementById("menuToggle");
+const menuToggle = document.getElementById("menuToggle");
+const mobileDropdown = document.getElementById("mobileMenuDropdown");
 
-const navMenuMobile =
-  document.getElementById(
-    "navMenuMobile"
-  );
+if (menuToggle && mobileDropdown) {
 
+  menuToggle.addEventListener("click", function (event) {
 
-if (
-  menuToggle &&
-  navMenuMobile
-) {
+    event.stopPropagation();
 
-  menuToggle.addEventListener(
-    "click",
-    () => {
+    this.classList.toggle("active");
+    mobileDropdown.classList.toggle("open");
 
-      navMenuMobile.classList.toggle(
-        "open"
-      );
-
+    // Toggle overlay class on parent
+    const navParent = document.querySelector(".bh-centered-nav");
+    if (navParent) {
+      navParent.classList.toggle("menu-open");
     }
-  );
 
+  });
 
-  navMenuMobile
-    .querySelectorAll("a")
-    .forEach(link => {
+  /* Close after clicking any navigation link in the dropdown */
+  mobileDropdown.querySelectorAll("a").forEach(link => {
 
-      link.addEventListener(
-        "click",
-        () => {
+    link.addEventListener("click", () => {
 
-          navMenuMobile.classList.remove(
-            "open"
-          );
+      menuToggle.classList.remove("active");
+      mobileDropdown.classList.remove("open");
 
-        }
-      );
+      const navParent = document.querySelector(".bh-centered-nav");
+      if (navParent) {
+        navParent.classList.remove("menu-open");
+      }
 
     });
+
+  });
+
+  /* Close when clicking outside */
+  document.addEventListener("click", event => {
+
+    if (
+      !mobileDropdown.contains(event.target) &&
+      !menuToggle.contains(event.target)
+    ) {
+
+      menuToggle.classList.remove("active");
+      mobileDropdown.classList.remove("open");
+
+      const navParent = document.querySelector(".bh-centered-nav");
+      if (navParent) {
+        navParent.classList.remove("menu-open");
+      }
+
+    }
+
+  });
 
 }
 
@@ -534,9 +465,7 @@ if (
    ========================================================= */
 
 const siteHeader =
-  document.getElementById(
-    "siteHeader"
-  );
+  document.getElementById("siteHeader");
 
 
 if (siteHeader) {
@@ -562,14 +491,10 @@ if (siteHeader) {
    ========================================================= */
 
 const slides =
-  document.querySelectorAll(
-    ".hero-slide"
-  );
+  document.querySelectorAll(".hero-slide");
 
 const dots =
-  document.querySelectorAll(
-    ".dot"
-  );
+  document.querySelectorAll(".dot");
 
 let currentSlide = 0;
 let sliderTimer;
@@ -581,38 +506,29 @@ let sliderTimer;
 
 function showSlide(index) {
 
-  if (!slides.length) {
-    return;
-  }
-
+  if (!slides.length) return;
 
   currentSlide =
     (index + slides.length) %
     slides.length;
 
+  slides.forEach((slide, i) => {
 
-  slides.forEach(
-    (slide, i) => {
+    slide.classList.toggle(
+      "active",
+      i === currentSlide
+    );
 
-      slide.classList.toggle(
-        "active",
-        i === currentSlide
-      );
+  });
 
-    }
-  );
+  dots.forEach((dot, i) => {
 
+    dot.classList.toggle(
+      "active",
+      i === currentSlide
+    );
 
-  dots.forEach(
-    (dot, i) => {
-
-      dot.classList.toggle(
-        "active",
-        i === currentSlide
-      );
-
-    }
-  );
+  });
 
 }
 
@@ -623,24 +539,15 @@ function showSlide(index) {
 
 function startSlider() {
 
-  clearInterval(
-    sliderTimer
-  );
-
+  clearInterval(sliderTimer);
 
   if (slides.length > 1) {
 
-    sliderTimer =
-      setInterval(
-        () => {
+    sliderTimer = setInterval(() => {
 
-          showSlide(
-            currentSlide + 1
-          );
+      showSlide(currentSlide + 1);
 
-        },
-        5000
-      );
+    }, 5000);
 
   }
 
@@ -653,21 +560,15 @@ function startSlider() {
 
 dots.forEach(dot => {
 
-  dot.addEventListener(
-    "click",
-    () => {
+  dot.addEventListener("click", () => {
 
-      showSlide(
-        Number(
-          dot.dataset.slide
-        )
-      );
+    showSlide(
+      Number(dot.dataset.slide)
+    );
 
+    startSlider();
 
-      startSlider();
-
-    }
-  );
+  });
 
 });
 
@@ -680,15 +581,8 @@ startSlider();
    ========================================================= */
 
 const reservationForm =
-  document.getElementById(
-    "reservationForm"
-  );
+  document.getElementById("reservationForm");
 
-
-/*
-  Restaurant WhatsApp number
-  Change this when required.
-*/
 
 const whatsappNumber =
   "919028910022";
@@ -702,50 +596,29 @@ if (reservationForm) {
 
       event.preventDefault();
 
-
       const date =
-        document.getElementById(
-          "resDate"
-        )?.value || "";
-
+        document.getElementById("resDate")?.value || "";
 
       const name =
-        document.getElementById(
-          "resName"
-        )?.value.trim() || "";
-
+        document.getElementById("resName")?.value.trim() || "";
 
       const time =
-        document.getElementById(
-          "resTime"
-        )?.value || "";
-
+        document.getElementById("resTime")?.value || "";
 
       const email =
-        document.getElementById(
-          "resEmail"
-        )?.value.trim() || "";
-
+        document.getElementById("resEmail")?.value.trim() || "";
 
       const guests =
-        document.getElementById(
-          "resGuests"
-        )?.value || "";
-
+        document.getElementById("resGuests")?.value || "";
 
       const phone =
-        document.getElementById(
-          "resPhone"
-        )?.value.trim() || "";
+        document.getElementById("resPhone")?.value.trim() || "";
 
 
-      /*
-        Format date
-      */
+      /* Format date */
 
       const formattedDate =
         date
-
           ? new Date(
               date + "T00:00:00"
             ).toLocaleDateString(
@@ -756,17 +629,13 @@ if (reservationForm) {
                 year: "numeric"
               }
             )
+          : "Not provided";
 
-          : date;
 
-
-      /*
-        Format time
-      */
+      /* Format time */
 
       const formattedTime =
         time
-
           ? new Date(
               `1970-01-01T${time}`
             ).toLocaleTimeString(
@@ -776,16 +645,12 @@ if (reservationForm) {
                 minute: "2-digit"
               }
             )
+          : "Not provided";
 
-          : time;
 
-
-      /*
-        WhatsApp message
-      */
+      /* WhatsApp message */
 
       const message =
-
 `NEW TABLE RESERVATION - BLUE HEAVEN
 
 Name: ${name}
@@ -800,12 +665,14 @@ Please confirm my table reservation.
 Thank you!`;
 
 
-      /*
-        Open WhatsApp
-      */
+      /* Correct WhatsApp URL */
+
+      const whatsappURL =
+        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
 
       window.open(
-        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+        whatsappURL,
         "_blank"
       );
 
@@ -820,9 +687,7 @@ Thank you!`;
    ========================================================= */
 
 const yearElement =
-  document.getElementById(
-    "year"
-  );
+  document.getElementById("year");
 
 
 if (yearElement) {
@@ -837,21 +702,19 @@ if (yearElement) {
    SCROLL REVEAL ANIMATIONS
    ========================================================= */
 
-const revealObserver =
-  new IntersectionObserver(
-    entries => {
+if ("IntersectionObserver" in window) {
 
-      entries.forEach(
-        entry => {
+  const revealObserver =
+    new IntersectionObserver(
+      entries => {
 
-          if (
-            entry.isIntersecting
-          ) {
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
 
             entry.target.classList.add(
               "in-view"
             );
-
 
             revealObserver.unobserve(
               entry.target
@@ -859,84 +722,61 @@ const revealObserver =
 
           }
 
-        }
-      );
+        });
 
-    },
-    {
-      threshold:0.15
-    }
-  );
+      },
+      {
+        threshold: 0.15
+      }
+    );
 
 
-document
-  .querySelectorAll(
-    ".fade-up, .fade-left, .fade-right, .scale-in"
-  )
-  .forEach(el => {
+  document
+    .querySelectorAll(
+      ".fade-up, .fade-left, .fade-right, .scale-in"
+    )
+    .forEach(el => {
 
-    /*
-      Hero animations run on load.
-    */
+      if (!el.closest(".hero")) {
 
-    if (
-      !el.closest(".hero")
-    ) {
+        revealObserver.observe(el);
 
-      revealObserver.observe(
-        el
-      );
+      }
 
-    }
+    });
 
-  });
+}
 
 
 /* =========================================================
    PRELOADER + HERO ENTRANCE
    ========================================================= */
 
-window.addEventListener(
-  "load",
-  () => {
+window.addEventListener("load", () => {
 
-    const preloader =
-      document.getElementById(
-        "preloader"
-      );
+  const preloader =
+    document.getElementById("preloader");
 
-    const hero =
-      document.querySelector(
-        ".hero"
-      );
+  const hero =
+    document.querySelector(".hero");
 
+  setTimeout(() => {
 
-    setTimeout(
-      () => {
+    if (preloader) {
 
-        if (preloader) {
+      preloader.classList.add("hide");
 
-          preloader.classList.add(
-            "hide"
-          );
+    }
 
-        }
+    if (hero) {
 
+      hero.classList.add("loaded");
 
-        if (hero) {
+    }
 
-          hero.classList.add(
-            "loaded"
-          );
+  }, 500);
 
-        }
-
-      },
-      500
-    );
-
-  }
-);
+});
 
 
 /* =========================================================
@@ -944,19 +784,13 @@ window.addEventListener(
    ========================================================= */
 
 const hero =
-  document.querySelector(
-    ".hero"
-  );
+  document.querySelector(".hero");
 
 const heroSlides =
-  document.querySelectorAll(
-    ".hero-slide"
-  );
+  document.querySelectorAll(".hero-slide");
 
 const heroContent =
-  document.querySelector(
-    ".hero-content"
-  );
+  document.querySelector(".hero-content");
 
 
 if (
@@ -972,17 +806,12 @@ if (
   let currentY = 0;
 
 
-  /* -----------------------------------------
-     Mouse movement
-     ----------------------------------------- */
-
   hero.addEventListener(
     "mousemove",
     event => {
 
       const rect =
         hero.getBoundingClientRect();
-
 
       mouseX =
         (
@@ -993,7 +822,6 @@ if (
           rect.width -
           0.5
         ) * 2;
-
 
       mouseY =
         (
@@ -1009,50 +837,34 @@ if (
   );
 
 
-  /* -----------------------------------------
-     Smooth parallax
-     ----------------------------------------- */
-
   function animateParallax() {
 
     currentX +=
-      (
-        mouseX -
-        currentX
-      ) * 0.035;
-
+      (mouseX - currentX) * 0.035;
 
     currentY +=
-      (
-        mouseY -
-        currentY
-      ) * 0.035;
+      (mouseY - currentY) * 0.035;
 
 
-    heroSlides.forEach(
-      slide => {
+    heroSlides.forEach(slide => {
 
-        if (
-          slide.classList.contains(
-            "active"
-          )
-        ) {
+      if (
+        slide.classList.contains("active")
+      ) {
 
-          slide.style.setProperty(
-            "--mouse-x",
-            `${currentX * 10}px`
-          );
+        slide.style.setProperty(
+          "--mouse-x",
+          `${currentX * 10}px`
+        );
 
-
-          slide.style.setProperty(
-            "--mouse-y",
-            `${currentY * 7}px`
-          );
-
-        }
+        slide.style.setProperty(
+          "--mouse-y",
+          `${currentY * 7}px`
+        );
 
       }
-    );
+
+    });
 
 
     heroContent.style.transform =
@@ -1073,10 +885,6 @@ if (
   animateParallax();
 
 
-  /* -----------------------------------------
-     Reset parallax
-     ----------------------------------------- */
-
   hero.addEventListener(
     "mouseleave",
     () => {
@@ -1092,39 +900,42 @@ if (
 
 /* =========================================================
    ESCAPE KEY
-   Close menu modal / mobile menu
    ========================================================= */
 
 document.addEventListener(
   "keydown",
   event => {
 
+    if (event.key !== "Escape") return;
+
+
     if (
-      event.key === "Escape"
+      menuModal &&
+      menuModal.classList.contains("open")
     ) {
 
-      if (
-        menuModal &&
-        menuModal.classList.contains(
-          "open"
-        )
-      ) {
+      closeMenuModal();
 
-        closeMenuModal();
-
-      }
+    }
 
 
-      if (
-        navMenuMobile
-      ) {
+    if (mobileDropdown && mobileDropdown.classList.contains("open")) {
 
-        navMenuMobile.classList.remove(
-          "open"
-        );
+      mobileDropdown.classList.remove("open");
 
-      }
+    }
 
+
+    if (menuToggle) {
+
+      menuToggle.classList.remove("active");
+
+    }
+
+
+    const navParent = document.querySelector(".bh-centered-nav");
+    if (navParent) {
+      navParent.classList.remove("menu-open");
     }
 
   }
@@ -1136,9 +947,7 @@ document.addEventListener(
    ========================================================= */
 
 document
-  .querySelectorAll(
-    'a[href^="#"]'
-  )
+  .querySelectorAll('a[href^="#"]')
   .forEach(link => {
 
     link.addEventListener(
@@ -1146,28 +955,24 @@ document
       event => {
 
         const targetId =
-          link.getAttribute(
-            "href"
-          );
+          link.getAttribute("href");
 
 
         if (
           !targetId ||
           targetId === "#"
         ) {
+
           return;
+
         }
 
 
         const target =
-          document.querySelector(
-            targetId
-          );
+          document.querySelector(targetId);
 
 
-        if (!target) {
-          return;
-        }
+        if (!target) return;
 
 
         event.preventDefault();
@@ -1180,17 +985,14 @@ document
 
 
         const targetPosition =
-          target.getBoundingClientRect()
-            .top +
+          target.getBoundingClientRect().top +
           window.scrollY -
           headerOffset;
 
 
         window.scrollTo({
-          top:
-            targetPosition,
-          behavior:
-            "smooth"
+          top: targetPosition,
+          behavior: "smooth"
         });
 
       }
@@ -1207,89 +1009,102 @@ document.documentElement.classList.add(
   "js-ready"
 );
 
+
 /* =========================================================
-   BLUE HEAVEN — YEARS SINCE 2000 COUNTER
+   YEARS SINCE 2000 COUNTER
    ========================================================= */
 
 const yearsCounter =
   document.getElementById("yearsCounter");
 
+
 if (yearsCounter) {
 
   const startYear = 2000;
-  const currentYear = new Date().getFullYear();
+
+  const currentYear =
+    new Date().getFullYear();
 
   const targetYears =
     currentYear - startYear;
 
   let counterStarted = false;
 
-  const counterObserver =
-    new IntersectionObserver(
-      entries => {
 
-        entries.forEach(entry => {
+  if ("IntersectionObserver" in window) {
 
-          if (
-            entry.isIntersecting &&
-            !counterStarted
-          ) {
+    const counterObserver =
+      new IntersectionObserver(
+        entries => {
 
-            counterStarted = true;
+          entries.forEach(entry => {
 
-            let current = 0;
+            if (
+              entry.isIntersecting &&
+              !counterStarted
+            ) {
 
-            const duration = 1400;
+              counterStarted = true;
 
-            const stepTime =
-              Math.max(
-                20,
-                Math.floor(
-                  duration / targetYears
-                )
-              );
+              let current = 0;
 
-            const counter =
-              setInterval(() => {
+              const duration = 1400;
 
-                current++;
+              const stepTime =
+                Math.max(
+                  20,
+                  Math.floor(
+                    duration / targetYears
+                  )
+                );
 
-                yearsCounter.textContent =
-                  current;
 
-                if (
-                  current >= targetYears
-                ) {
+              const counter =
+                setInterval(() => {
 
-                  clearInterval(counter);
+                  current++;
 
                   yearsCounter.textContent =
-                    targetYears;
+                    current;
 
-                }
 
-              }, stepTime);
+                  if (
+                    current >= targetYears
+                  ) {
 
-            counterObserver.unobserve(
-              entry.target
-            );
+                    clearInterval(counter);
 
-          }
+                    yearsCounter.textContent =
+                      targetYears;
 
-        });
+                  }
 
-      },
-      {
-        threshold:0.4
-      }
+                }, stepTime);
+
+
+              counterObserver.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.4
+        }
+      );
+
+
+    counterObserver.observe(
+      yearsCounter
     );
 
-
-  counterObserver.observe(
-    yearsCounter
-  );
+  }
 
 }
+
 
 /* =========================================================
    AUTOMATIC REVIEWS SLIDESHOW
@@ -1310,15 +1125,15 @@ let reviewTimer;
    NUMBER OF VISIBLE REVIEWS
    ========================================================= */
 
-function getReviewsPerView(){
+function getReviewsPerView() {
 
-  if(window.innerWidth <= 680){
+  if (window.innerWidth <= 680) {
 
     return 1;
 
   }
 
-  if(window.innerWidth <= 1000){
+  if (window.innerWidth <= 1000) {
 
     return 2;
 
@@ -1330,10 +1145,20 @@ function getReviewsPerView(){
 
 
 /* =========================================================
-   SLIDE TO NEXT GROUP
+   SLIDE REVIEWS
    ========================================================= */
 
-function slideReviews(){
+function slideReviews() {
+
+  if (
+    !reviewsTrack ||
+    !reviewCards.length
+  ) {
+
+    return;
+
+  }
+
 
   const perView =
     getReviewsPerView();
@@ -1342,13 +1167,17 @@ function slideReviews(){
     reviewCards.length;
 
   const totalGroups =
-    Math.ceil(totalReviews / perView);
+    Math.ceil(
+      totalReviews / perView
+    );
 
 
   reviewIndex++;
 
 
-  if(reviewIndex >= totalGroups){
+  if (
+    reviewIndex >= totalGroups
+  ) {
 
     reviewIndex = 0;
 
@@ -1360,7 +1189,9 @@ function slideReviews(){
 
 
   const gap =
-    window.innerWidth <= 680 ? 15 : 20;
+    window.innerWidth <= 680
+      ? 15
+      : 20;
 
 
   const distance =
@@ -1376,46 +1207,51 @@ function slideReviews(){
 
 
 /* =========================================================
-   START SLIDESHOW
+   START REVIEWS
    ========================================================= */
 
-function startReviewSlideshow(){
+function startReviewSlideshow() {
 
   clearInterval(reviewTimer);
 
-  reviewTimer = setInterval(
-
-    slideReviews,
-
-    4500
-
-  );
+  reviewTimer =
+    setInterval(
+      slideReviews,
+      4500
+    );
 
 }
 
 
 /* =========================================================
-   RESET AFTER RESIZE
+   RESET REVIEWS AFTER RESIZE
    ========================================================= */
 
-window.addEventListener("resize", () => {
+window.addEventListener(
+  "resize",
+  () => {
 
-  reviewIndex = 0;
+    reviewIndex = 0;
 
-  reviewsTrack.style.transform =
-    "translateX(0)";
+    if (reviewsTrack) {
 
-});
+      reviewsTrack.style.transform =
+        "translateX(0)";
+
+    }
+
+  }
+);
 
 
 /* =========================================================
-   INITIALIZE
+   INITIALIZE REVIEWS
    ========================================================= */
 
-if(
+if (
   reviewsTrack &&
   reviewCards.length
-){
+) {
 
   startReviewSlideshow();
 
